@@ -1,0 +1,14 @@
+# Enable the Rewrite Engine
+RewriteEngine On
+
+# Redirect requests for pitdigital.nl or www.pitdigital.nl to root
+RewriteCond %{HTTP_HOST} ^(www\.)?pitdigital\.nl$ [NC]
+RewriteCond %{REQUEST_URI} !^/
+RewriteRule ^(.*)$ /$1 [L]
+
+# Custom 404 Error Document for pitdigital.nl
+ErrorDocument 404 /404.html
+
+# Ensure requests for assets are not rewritten
+RewriteCond %{REQUEST_URI} !\.(gif|jpe?g|png|css|js|woff|woff2|ttf|svg|eot)$ [NC]
+RewriteRule ^(.*)$ - [L]
